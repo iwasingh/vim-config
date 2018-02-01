@@ -81,6 +81,7 @@ NeoBundle 'christoomey/vim-sort-motion'
 
 " Colorscheme solarazied for vim
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'kristijanhusak/vim-hybrid-material'
 
 " Allow autoclose paired characters like [,] or (,),
 " and add smart cursor positioning inside it,
@@ -119,6 +120,12 @@ endif
 
 " Advanced features support for typescript editing
 NeoBundle 'Quramy/tsuquyomi'
+
+" Integration with tests
+NeoBundle 'janko-m/vim-test'
+
+" Show code coverage in vim
+NeoBundle 'ruanyl/coverage.vim'
 
 " Add smart commands for comments like:
 " gcc - Toggle comment for the current line
@@ -457,7 +464,7 @@ let tern_show_signature_in_pum = 1
 " vim-airline
 
 " Colorscheme for airline
-let g:airline_theme='understated'
+let g:airline_theme='solarized'
 
 " Set custom left separator
 let g:airline_left_sep = '▶'
@@ -506,6 +513,19 @@ let g:ycm_key_list_previous_completion=["<S-tab>"]
 " map jk to escape
 call arpeggio#map('i', '', 0, 'jk', '<ESC>')
 
+"-------------------------
+" vim-test
+
+nmap <silent> <leader>tf :TestFile<CR>
+let test#strategy = "vimterminal"
+
+"-------------------------
+" vim-coverage
+"
+let g:coverage_json_report_path = '.coverage/coverage-final.json'
+let g:coverage_sign_covered = '⦿'
+let g:coverage_show_covered = 1
+
 "--------------------------------------------------
 " Colorscheme
 
@@ -530,10 +550,13 @@ highlight ColorColumn ctermbg=lightGrey
 " Buffer will be hidden instead of closed when no one display it
 "set hidden
 
+" Spellcheck
+set spell spelllang=en_us
+
 " Auto reload changed files
 set autoread
 
-" Always change current dirrectory to current-editing-file dir
+" Always change current directory to current-editing-file dir
 "set autochdir
 
 " Indicates fast terminal connection
@@ -764,6 +787,9 @@ nmap <silent><leader>to :tabnew .<CR>
 " Replace
 nmap <leader>s :%s//<left>
 vmap <leader>s :s//<left>
+
+" convert to json to js
+nmap <leader>jj :%s/\"\(\w*\)\"\:/\1\:/<CR>:%s/\"\(.*\)\"/\'\1\'/<CR>
 
 " Moving between splits
 nmap <leader>w <C-w>w

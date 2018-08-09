@@ -70,12 +70,15 @@ NeoBundle 'SirVer/ultisnips'
 " Default snippets
 NeoBundle 'honza/vim-snippets'
 
+" Fuzzy finder
+NeoBundle 'kien/ctrlp.vim'
+
 " Dirr diff
 NeoBundle 'vim-scripts/DirDiff.vim'
 
 " Colorscheme solarazied for vim
-NeoBundle 'altercation/vim-colors-solarized'
-
+" NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'dikiaap/minimalist'
 " Allow autoclose paired characters like [,] or (,),
 " and add smart cursor positioning inside it,
 NeoBundle 'Raimondi/delimitMate'
@@ -134,16 +137,18 @@ NeoBundle 'othree/html5.vim'
 
 " Improve javascript syntax higlighting, needed for good folding,
 " and good-looking javascript code
-NeoBundle 'jelera/vim-javascript-syntax'
+" NeoBundle 'jelera/vim-javascript-syntax'
 
 " Improved json syntax highlighting
 NeoBundle 'elzr/vim-json'
 
 " Syntax highlighting for .jsx (js files for react js)
-NeoBundle 'mxw/vim-jsx'
+" NeoBundle 'mxw/vim-jsx'
 
-" Syntax highlighting for typescript
-NeoBundle 'leafgarland/typescript-vim'
+" Syntax highlighting for js and vue files 
+" NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'posva/vim-vue'
 
 " Add Support css3 property
 NeoBundle 'hail2u/vim-css3-syntax'
@@ -166,7 +171,7 @@ NeoBundle 'alvan/vim-closetag'
 
 " Smart indent for javascript
 " http://www.vim.org/scripts/script.php?script_id=3081
-NeoBundle 'lukaszb/vim-web-indent'
+" NeoBundle 'lukaszb/vim-web-indent'
 
 " Plugin for changing cursor when entering in insert mode
 " looks like it works fine with iTerm Konsole adn xerm
@@ -178,7 +183,7 @@ NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 
 " Code-completion for jquery, lodash e.t.c
-NeoBundle 'othree/javascript-libraries-syntax.vim'
+" NeoBundle 'othree/javascript-libraries-syntax.vim'
 
 " Most recent files source for unite
 NeoBundle 'Shougo/neomru.vim'
@@ -239,9 +244,9 @@ NeoBundleCheck
 "-------------------------
 " ultsnips
 
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
-let g:UltiSnipsExpandTrigger="<nop>"
+let g:UltiSnipsJumpForwardTrigger="<C-f>"
+let g:UltiSnipsJumpBackwardTrigger="<C-r>"
+let g:UltiSnipsExpandTrigger="<C-d>"
 let g:ulti_expand_or_jump_res = 0
 
 " Smart snippet expanding on CR
@@ -253,7 +258,7 @@ function! <SID>ExpandSnippetOrReturn()
     return "\<CR>"
   endif
 endfunction
-inoremap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "\<CR>"
 
 "-------------------------
 " Unite
@@ -343,6 +348,7 @@ endfunction
 let g:syntastic_javascript_jshint_exec = s:FindSyntasticExecPath('jshint')
 let g:syntastic_javascript_jscs_exec = s:FindSyntasticExecPath('jscs')
 let g:syntastic_css_csslint_exec= s:FindSyntasticExecPath('csslint')
+let g:syntastic_javascript_jslint_exec = s:FindSyntasticExecPath('eslint')
 
 " Enable autochecks
 let g:syntastic_check_on_open=1
@@ -354,7 +360,7 @@ let g:syntastic_always_populate_loc_list = 1
 " check json files with jshint
 let g:syntastic_filetype_map = { "json": "javascript", }
 
-let g:syntastic_javascript_checkers = ["jshint", "jscs"]
+let g:syntastic_javascript_checkers = ["eslint"]
 
 " open quicfix window with all error found
 nmap <silent> <leader>ll :lopen<cr>
@@ -397,7 +403,7 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
 " Without this we can't disable delimitMate for specific file types
-let loaded_delimitMate = 1
+" let loaded_delimitMate = 1
 
 "-------------------------
 " vim-mustache-handlebars
@@ -418,10 +424,19 @@ let g:closetag_filenames = "*.handlebars,*.html,*.xhtml,*.phtml"
 " let g:solarized_termtrans=1
 
 "-------------------------
+" ctrlp.vim
+" exlude build / dependencies project files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = 'node_modules\|plugins\|DS_Store\|git\|vendor\|platforms\|bower_components\|\v[\/]\.(git|hg|svn)$'
+
+" make a full search from current dir
+let g:ctrlp_working_path_mode = 'c'
+
+"-------------------------
 " vim-airline
 
 " Colorscheme for airline
-let g:airline_theme='understated'
+let g:airline_theme='minimalist'
 
 " Set custom left separator
 let g:airline_left_sep = '▶'
@@ -484,13 +499,13 @@ call arpeggio#map('i', '', 0, 'jk', '<ESC>')
 " Colorscheme
 
 " Use solarized colorscheme
-colorscheme solarized
+colorscheme minimalist 
 
 " Setting up light color scheme
-set background=light
+set background=dark
 
 " Set highlighting for colorcolumn
-highlight ColorColumn ctermbg=lightGrey
+highlight ColorColumn ctermbg=darkGrey
 
 "--------------------------------------------------
 " General options
@@ -621,10 +636,11 @@ set colorcolumn=+1
 " Tab options
 
 " Copy indent from previous line
-set autoindent
+" set autoindent
 
 " Enable smart indent. It add additional indents whe necessary
-set smartindent
+" set smartindent
+set cindent
 
 " Replace tabs with spaces
 set expandtab
@@ -633,14 +649,14 @@ set expandtab
 set smarttab
 
 " Number of spaces to use for each step of indent
-set shiftwidth=4
+set shiftwidth=2
 
 " Number of spaces that a Tab in the file counts for
-set tabstop=4
+set tabstop=2
 
 " Same but for editing operation (not sure what exactly does it means)
 " but in most cases tabstop and softtabstop better be the same
-set softtabstop=4
+set softtabstop=2
 
 " Round indent to multiple of 'shiftwidth'.
 " Indentation always be multiple of shiftwidth
@@ -688,7 +704,7 @@ set wildcharm=<TAB>
 " Folding
 
 " Enable syntax folding in javascript
-let javaScript_fold=1
+" let javaScript_fold=1
 
 " No fold closed at open file
 set foldlevelstart=99
@@ -783,6 +799,7 @@ if has("autocmd")
         au BufRead,BufNewFile *.xjst set ft=javascript
         au BufRead,BufNewFile *.tt2 set ft=tt2
         au BufRead,BufNewFile *.plaintex set ft=plaintex.tex
+        au BufRead,BufNewFile *.vue setlocal filetype=vue
 
         " Auto close preview window, it uses with tags,
         " I don't use it
@@ -794,6 +811,9 @@ if has("autocmd")
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType typescript setlocal omnifunc=typescriptcomlete#CompleteTS
+        
+        " Fix vim-vue plugin syntax
+        autocmd FileType vue syntax sync fromstart
 
         " Disable vertical line at max string length in NERDTree
         autocmd FileType * setlocal colorcolumn=+1

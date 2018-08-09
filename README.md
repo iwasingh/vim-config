@@ -1,6 +1,7 @@
-### Vim config for web development
+### Vim config for web development - Vue, ES6, Javascript, Typescript
+I modified the original repository and updated to make compatible with new front-end dev frameworks (Vue).
 
-<img src="http://i.imgur.com/ElOEHZ3.png"/>
+<img src=""/>
 
 ### Features
 * Only one file, you don't need to run any installation script.

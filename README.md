@@ -1,5 +1,6 @@
 ### Vim config for web development - Vue, ES6, Javascript, Typescript
 I modified the original repository and updated to make compatible with new front-end dev frameworks (Vue).
+Now i'm taking care of this. Gradually, i'll make updates and fixes.
 
 <img src="https://raw.githubusercontent.com/iwasingh/vim-config/master/images/vim.png"/>
 

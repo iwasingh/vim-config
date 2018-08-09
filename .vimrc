@@ -251,7 +251,8 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-r>"
 let g:UltiSnipsExpandTrigger="<C-d>"
 let g:ulti_expand_or_jump_res = 0
-
+" let g:UltiSnipsSnippetsDir='~/.vim/UltiSnips'
+" let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips']
 " Smart snippet expanding on CR
 function! <SID>ExpandSnippetOrReturn()
   let snippet = UltiSnips#ExpandSnippetOrJump()

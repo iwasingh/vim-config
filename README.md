@@ -107,9 +107,16 @@ lower/upper-case in the search pattern, it'll be case-sensitive.
 It's a bundler, which helps to install other bundles. It's quite smart and works better then
 vundle.
 #### Color Scheme &mdash; [Solarized](https://github.com/altercation/vim-colors-solarized)
-A popular light/dark color scheme.
+A popular light/dark color scheme. 
+It is in the .vimrc but is disabled, whenever you want you can activate it uncommenting the NeoBundle directive
 
 ![Screen](https://raw.githubusercontent.com/altercation/solarized/master/img/solarized-vim.png)
+
+#### Minimalist Color Scheme &mdash; [Minimalist](https://github.com/dikiaap/minimalist)
+It is the default color scheme
+
+![Screen](https://camo.githubusercontent.com/bf02c63385f9f140bfd9fedca12f94988021fb08/68747470733a2f2f692e696d6775722e636f6d2f775842726679762e706e67)
+
 #### Snippets &mdash; [Ultisnips](https://github.com/SirVer/ultisnips) & [vim-snippets](https://github.com/honza/vim-snippets)
 Neosnippet is a snippet engine itself, and Vim-snippets &mdash; it’s default snippets collection.
 

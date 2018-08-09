@@ -166,6 +166,9 @@ NeoBundle 'tpope/vim-markdown'
 " is positioned on a tag.
 NeoBundle 'gregsexton/MatchTag'
 
+" Color preview
+NeoBundle 'gorodinskiy/vim-coloresque'
+
 " Automatically add closing tags in html-like formats
 NeoBundle 'alvan/vim-closetag'
 
@@ -809,7 +812,7 @@ if has("autocmd")
         " Enable omni completion.
         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType javascript,vue setlocal omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType typescript setlocal omnifunc=typescriptcomlete#CompleteTS
         
         " Fix vim-vue plugin syntax

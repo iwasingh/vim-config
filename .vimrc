@@ -325,6 +325,8 @@ let NERDTreeShowHidden=1
 " Disable bookmarks label, and hint about '?'
 let NERDTreeMinimalUI=1
 
+let g:NERDTreeWinPos = "left"
+
 " Display current file in the NERDTree ont the left
 nmap <silent> <leader>f :NERDTreeFind<CR>
 
@@ -351,7 +353,7 @@ endfunction
 " setting up jshint csslint and jscs if available
 let g:syntastic_javascript_jshint_exec = s:FindSyntasticExecPath('jshint')
 let g:syntastic_javascript_jscs_exec = s:FindSyntasticExecPath('jscs')
-let g:syntastic_css_csslint_exec= s:FindSyntasticExecPath('csslint')
+" let g:syntastic_css_csslint_exec= s:FindSyntasticExecPath('csslint')
 let g:syntastic_javascript_jslint_exec = s:FindSyntasticExecPath('eslint')
 
 " Enable autochecks
@@ -437,6 +439,14 @@ let g:ctrlp_custom_ignore = 'node_modules\|plugins\|DS_Store\|git\|vendor\|platf
 let g:ctrlp_working_path_mode = 'c'
 
 "-------------------------
+" Disable sql completion
+"
+let g:loaded_sql_completion = 0
+let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'
+let g:omni_sql_no_default_maps = 1
+let g:ftplugin_sql_omni_key = '<Leader>sql'
+
+"-------------------------
 " vim-airline
 
 " Colorscheme for airline
@@ -511,6 +521,8 @@ set background=dark
 " Set highlighting for colorcolumn
 highlight ColorColumn ctermbg=darkGrey
 
+" Python syntax highlithing support
+let python_highlight_all=1
 "--------------------------------------------------
 " General options
 
@@ -549,10 +561,11 @@ endif
 
 " Interprete all files like binary and disable many features.
 " set binary
-
+" Sounds
+set vb
+"
 "--------------------------------------------------
 " Display options
-
 " Hide showmode
 " Showmode is useless with airline
 set noshowmode
@@ -665,7 +678,7 @@ set softtabstop=2
 " Round indent to multiple of 'shiftwidth'.
 " Indentation always be multiple of shiftwidth
 " Applies to  < and > command
-set shiftround
+" set shiftround
 
 "--------------------------------------------------
 " Search options
@@ -791,10 +804,10 @@ if has("autocmd")
           \| exe "normal g'\"" | endif
 
         " Set filetypes aliases
-        au FileType htmldjango set ft=html.htmldjango
-        au FileType scss set ft=scss.css
-        au FileType less set ft=less.css
-        au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
+        " au FileType htmldjango set ft=html.htmldjango
+        " au FileType scss set ft=scss.css
+        " au FileType less set ft=less.css
+        " au BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
         au BufRead,BufNewFile *.js set ft=javascript.javascript-jquery
         au BufRead,BufNewFile *.json set ft=json
         " Execute python \ -mjson.tool for autoformatting *.json
@@ -804,6 +817,8 @@ if has("autocmd")
         au BufRead,BufNewFile *.tt2 set ft=tt2
         au BufRead,BufNewFile *.plaintex set ft=plaintex.tex
         au BufRead,BufNewFile *.vue setlocal filetype=vue
+        au BufRead,BufNewFile *.ts set ft=typescript.javascript
+
 
         " Auto close preview window, it uses with tags,
         " I don't use it
@@ -815,7 +830,6 @@ if has("autocmd")
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript,vue setlocal omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType typescript setlocal omnifunc=typescriptcomlete#CompleteTS
-        
         " Fix vim-vue plugin syntax
         autocmd FileType vue syntax sync fromstart
 
@@ -827,6 +841,16 @@ if has("autocmd")
         " au FileType javascript* call JavaScriptFold()
         au FileType html let b:loaded_delimitMate = 1
         au FileType handlebars let b:loaded_delimitMate = 1
+
+        "Python PEP8 Indentation
+        au BufNewFile,BufRead *.py 
+              \ set tabstop=4 |
+              \ set softtabstop=4 |
+              \ set shiftwidth=4 |
+              \ set textwidth=79 |
+              \ set expandtab |
+              \ set autoindent |
+              \ set fileformat=unix
 
     " Group end
     augroup END
